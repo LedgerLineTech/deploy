@@ -43,7 +43,7 @@ def launch_new_bot(bot_name, image_name, credentials, selected_controllers, max_
         st.warning("You need to define the bot name.")
         return False
     if not image_name:
-        st.warning("You need to select the hummingbot image.")
+        st.warning("You need to select the tradingbot image.")
         return False
     if not selected_controllers:
         st.warning("You need to select the controllers configs. Please select at least one controller "
@@ -146,19 +146,27 @@ with st.container(border=True):
             if default_image not in available_images:
                 available_images.insert(0, default_image)
 
-            image_name = st.selectbox(
-                "Hummingbot Image",
-                options=available_images,
+            # Create display names by replacing "hummingbot" with "tradingbot" for UI
+            display_images = [img.replace("hummingbot", "tradingbot") for img in available_images]
+            
+            selected_display = st.selectbox(
+                "TradingBot Image",
+                options=display_images,
                 index=0,
                 key="image_select"
             )
+            
+            # Convert back to actual hummingbot image name
+            image_name = selected_display.replace("tradingbot", "hummingbot")
         except Exception as e:
             st.error(f"Failed to fetch available images: {e}")
-            image_name = st.text_input(
-                "Hummingbot Image",
-                value="hummingbot/hummingbot:latest",
+            display_name = st.text_input(
+                "TradingBot Image",
+                value="tradingbot/tradingbot:latest",
                 key="image_input"
             )
+            # Convert display name back to actual hummingbot image name
+            image_name = display_name.replace("tradingbot", "hummingbot")
 
 # Risk Management Section
 with st.container(border=True):
