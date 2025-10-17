@@ -181,7 +181,7 @@ st.plotly_chart(fig, use_container_width=True)
 c1, c2, c3 = st.columns([2, 2, 1])
 
 with c1:
-    config_base = st.text_input("Config Base", value=f"bollinger_v1-{connector_name}-{trading_pair.split('-')[0]}")
+    config_base = st.text_input("Config Base", value=f"kalman_filter_v1-{connector_name}-{trading_pair.split('-')[0]}")
 with c2:
     config_tag = st.text_input("Config Tag", value="1.1")
 

@@ -1,0 +1,10 @@
+# Use the official Hummingbot dashboard image as base
+FROM hummingbot/dashboard:latest
+
+# Copy the modified save_config.py component
+COPY components/save_config.py /home/dashboard/frontend/components/save_config.py
+
+# Set the working directory
+WORKDIR /home/dashboard
+
+# The base image already has the entrypoint configured
